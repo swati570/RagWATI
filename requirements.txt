@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pymongo
+neo4j
+langchain
+langchain-community
+pypdf
+python-dotenv
+passlib
+bcrypt
+PyJWT
+numpy
+py2neo
