@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Form
-from backend.utils import hash_password, verify_password, create_jwt_token
-from backend.db_mongo import users_col  
+from Backend.utils import hash_password, verify_password, create_jwt_token
+from Backend.db_mongo import users_col  
 
 router = APIRouter()
 
