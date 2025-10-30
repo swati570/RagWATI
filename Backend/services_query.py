@@ -8,7 +8,7 @@ from Backend.services_pdf import generate_embedding, get_user_projects
 
 
 # Initialize Langfuse callback
-langfuse_callback = LangfuseCallbackHandler()
+langfuse_callback = CallbackHandler()
 
 def cosine_similarity(a, b):
     a, b = np.array(a), np.array(b)
