@@ -1,7 +1,14 @@
+import os
 import numpy as np
 from Backend.db_mongo import chunks_col, pdfs_col
 from langchain_ollama import OllamaLLM
+from langfuse.langchain import CallbackHandler
 from Backend.services_pdf import generate_embedding, get_user_projects
+
+
+
+# Initialize Langfuse callback
+langfuse_callback = LangfuseCallbackHandler()
 
 def cosine_similarity(a, b):
     a, b = np.array(a), np.array(b)
@@ -21,11 +28,12 @@ def get_answer(project_id, question):
     top_chunks = retrieve_chunks(project_id, question)
     context = "\n".join([c["text"] for c in top_chunks])
     model_name = "llama3"
-    llm = OllamaLLM(model=model_name)
+    llm = OllamaLLM(model=model_name, callbacks=[langfuse_callback])
     prompt = f"Use the following context to answer the question:\n{context}\n\nQuestion: {question}\nAnswer:"
     response = llm.invoke(prompt)
     return response
 
 def list_projects_for_user(user_id):
     return get_user_projects(user_id)
+
 
